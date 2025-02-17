@@ -70,7 +70,12 @@ To run the chatbot inside a Docker container, follow these steps:
    . Enter a question in the chat interface.
    . Receive an AI-generated response based on the document’s content.
 
-![Chatbot Preview](static/dashboard/image.png)
+   
+## Preview
+![Chatbot Preview](static/images/Dashboard.jpg)
+
+![Chatbot Preview](static/images/chat.jpg)
+
 
    
 
