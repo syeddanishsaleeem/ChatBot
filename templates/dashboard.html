@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+ <!-- Font Awesome for Icons -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+ <!-- <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/robot.svg') }}"> -->
+ <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5M3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.6 26.6 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.93.93 0 0 1-.765.935c-.845.147-2.34.346-4.235.346s-3.39-.2-4.235-.346A.93.93 0 0 1 3 9.219zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a25 25 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25 25 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135'/%3E%3Cpath d='M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2zM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5'/%3E%3C/svg%3E">
+
+  
+
+  <style>
+    body {
+      /* background-color: #f8f9fa;  */
+      font-family: 'Montserrat', sans-serif; /* Primary font for body text */
+      background-color: black;
+
+    }
+    #welcome{
+      color: white;
+    }
+    .navbar{
+      background-color: black;
+    }
+
+    .navbar-brand img {
+      height: 60px; /* Adjust logo size */
+    }
+
+    /* Custom Styling for Upload Section */
+    .upload-section {
+      border: 2px dashed #7636ff;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      cursor: pointer;
+      position: relative; /* For positioning the icon */
+      margin-top: 20px;
+      /* display:none; */
+    }
+
+    .upload-section p {
+      font-size: 1.2rem;
+      color: #7636ff;
+    }
+
+    .upload-section h5 {
+      color: #333;
+    }
+
+    /* Upload icon styling */
+    .upload-icon {
+      font-size: 40px; /* Adjust the size of the icon */
+      color: #7636ff;
+      margin-bottom: 10px;
+    }
+     /* Hide the default Dropzone message */
+     .dropzone .dz-default {
+      display: none;
+    }
+    .dropzone .dz-success-mark {
+        display: none;
+    }
+    .dropzone .dz-error-mark {
+        display: none;
+    }
+    .preview-container {
+      /* margin-top: 20px; 
+       text-align: center; */
+      display: none;
+    }
+
+    .preview-image {
+      max-width: 100%;
+      max-height: 500px;
+      width: 400px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      display: none;
+      border: 2px solid rgb(226, 226, 226);
+    }
+    
+    
+
+    /* Background overlay to cover the entire screen */
+    .modal-overlay {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      z-index: 9999; /* Ensure it appears above other content */
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Modal content container */
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+      font-size: 20px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .modal-body {
+      margin-bottom: 20px;
+    }
+
+    .modal-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .modal-button:hover {
+      background-color: #45a049;
+    }
+    .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+    <div class="container d-flex justify-content-center align-items-center">
+      <!-- Logo and Text Centered -->
+      <a class="navbar-brand d-flex flex-column align-items-center" href="/">
+        <i class="bi bi-robot" style="color: white; font-size: 35px; margin-bottom: 5px;"></i>
+        <h4 style="margin: 0; font-family: Montserrat; letter-spacing: 4px; color: white;">ChatBot</h4>
+      </a>
+    </div>
+  </nav>
+  
+  
+
+  <!-- Dashboard Content -->
+  <div style="margin-top: 100px;" class="container" id="welcome">
+    <h1>Welcome to the AI-Powered Chatbot</h1>
+    <p style="margin-top: 20px;">Upload your PDF document and get instant answers to your questions.<br>  
+    Our AI assistant will analyze your file and provide accurate responses in real time.</p>
+    <div class="row mt-5">
+      <div class="col-lg-6 mb-4">
+        <div class="upload-section" id="uploadSection">
+            <i class="upload-icon fas fa-upload"></i>
+            <p>Select an PDF file to upload</p>
+            <!-- Hidden file input -->
+            <input type="file" id="fileInput" class="form-control" style="display:none;" accept=".pdf">
+          </div>
+      
+          <div class="preview-container" id = "preview-container">
+            <!-- <h3>Image Preview</h3> -->
+            <!-- <input type="file" id="fileInput" accept=".pdf"> -->
+             
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="display: flex; align-items: center;padding: 0px;">
+                  <i class="bi bi-file-pdf-fill" style="font-size: 40px; color:red;"></i>
+              </div>
+              <span id="fileName" style="font-size: 16px; font-weight: bold;">abc.pdf</span>
+          </div>
+          
+            <div>
+                <p style="font-style: italic;">Click below button to start asking questions</p>
+                <button class="btn btn-dark" onclick="reset()">Continue</button>
+                
+            </div>
+          </div>
+           <!-- Loader -->
+        <div id="loader" style="display: none; text-align: center; margin-top: 20px;">
+            <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+          <div class="alert alert-success mt-3" style="display: none;margin-right: 20px;" id="successMessage">PDF uploaded successfully!</div>
+          <div class="alert alert-danger mt-3" style="display: none;margin-right: 20px;" id="errorMessage">Failed to upload the file. Please try again.</div>
+
+      </div>
+
+      <!-- Right Column: GIF Animation -->
+      <div class="col-lg-6 mb-4 text-center" id="resultAnimation" style="padding-top: 0px;margin-top: -30px;padding-left: 20px;">
+        <img src="./static/images/Animation - 1739619992684.gif" alt="AI Processing" style="width: 80%; max-width: 300px">
+      </div>
+    </div>
+    <!-- HTML for login modal -->
+<!-- Modal Structure -->
+<div id="tokenExpiredModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        Session Expired
+      </div>
+      <div class="modal-body">
+        <p>Your session has expired. Please log in again to continue.</p>
+      </div>
+      <button class="modal-button" onclick="window.location.href='/login'">Log In</button>
+    </div>
+  </div>
+  </div>
+  <!-- <footer class="footer" >
+    <div class="container mx-auto px-4">
+        <p class="text-lg font-semibold">Contact Us | Email: <a href="engr.syeddanishsaleem@gmail.com" class=" hover:underline" style="color: #7636ff;">engr.syeddanishsaleem@gmail.com</a> | Phone: <a href="tel:+923112221371" class=" hover:underline" style="color: #7636ff;">+923112221371</a>  | &copy; 2025 Applab. All rights reserved.</p>
+    </div>
+</footer> -->
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Dropzone.js Script for Drag & Drop -->
+  <script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.3/dist/dropzone.min.js"></script>
+
+  <!-- JavaScript for Handling Image Upload -->
+  <script>
+
+    function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${'access_token_cookie'}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+    }
+
+    const uploadSection = document.getElementById('uploadSection');
+    const fileInput = document.getElementById('fileInput');
+    const previewImage = document.getElementById('previewImage');
+    const previewContainer = document.getElementById('preview-container');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    const loader = document.getElementById('loader');
+   
+
+    // Trigger the file input when the upload section is clicked
+    uploadSection.addEventListener('click', function() {
+      fileInput.click();
+    });
+
+    // Handle file selection
+    fileInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        // Display the selected image in the preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImage.src = e.target.result;
+          previewImage.style.display = 'block';
+          previewContainer.style.display = 'block';
+          uploadSection.style.display = 'none';
+          resultTable.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+        // Call API to upload the image
+        uploadFile(file);
+      }
+    });
+
+    // Function to upload the image
+    async function uploadFile(file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      loader.style.display = 'block';
+      // const token = getCookie('jwt');
+      // console.log("token: ",token)
+
+    //   const response = await fetch('/upload', { // Replace '/upload' with your API endpoint
+    //     method: 'POST',
+    //     body: formData,
+    //   })
+      try { //https://86cf-154-192-17-52.ngrok-free.app/radiologist/radiologist_daignose_Xray
+    const response = await fetch('upload', { 
+      method: 'POST',
+      // headers: {
+      //   'Authorization': `Bearer ${token}`
+      //  }, // Include the token in the header
+      body: formData,
+    });
+    //   const uploadresponse = await response.json();
+      const result = await response.json();
+    
+    // if (response.status == 401){
+    //     showModal()
+    // }
+    
+    if (response.ok) {
+      window.location.href= "/message"
+      // previewContainer.style.display = 'block';
+      loader.style.display = 'none';
+
+
+     
+    } else {
+        loader.style.display = 'none';
+        errorMessage.style.display = 'block';
+
+      // alert('Error: ' + result.msg);
+      
+
+    }
+    //   try{
+    //     if (response.ok) {
+    //         successMessage.style.display = 'block';
+    //         errorMessage.style.display = 'none';
+            
+    //       } else {
+    //         throw new Error('Upload failed');
+    //       }
+
+    //   }
+    }catch(error) {
+        successMessage.style.display = 'none';
+          errorMessage.style.display = 'block';
+          loader.style.display = 'none';
+
+        //   console.error('Error uploading image:', error);
+
+      }
+      
+    }
+
+    // Function to show the modal
+    function showModal() {
+      const modal = document.getElementById('tokenExpiredModal');
+      modal.style.display = 'flex'; // Show the modal with the flex display
+    }
+
+    // Function to hide the modal (if needed)
+    function hideModal() {
+      const modal = document.getElementById('tokenExpiredModal');
+      modal.style.display = 'none'; // Hide the modal
+    }
+
+    // Example usage to show the modal (you can call this function when token is expired)
+    // showModal();
+
+    // Logout function
+    function reset() {
+      // Handle logout logic here
+    //   alert('Logging out...');
+      // Redirect to login page
+    //   document.cookie = 'access_token_cookie=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      window.location.href = 'message';
+    }
+
+    // Logout function
+    function logout() {
+      // Handle logout logic here
+    //   alert('Logging out...');
+      // Redirect to login page
+      document.cookie = 'access_token_cookie=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      window.location.href = 'login';
+    }
+  </script>
+</body>
+</html>
