@@ -28,7 +28,7 @@ This repository contains a chatbot built using Flask, LangChain, and Qdrant. The
 
     Create a .env file in the root directory and add the following content:
     ```sh
-    API_KEY=your_openai_api_key_here
+    OPEN_API_KEY=your_openai_api_key_here
     
 6. Replace your_openai_api_key_here with your actual OpenAI API key.
    Run the Flask application:
