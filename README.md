@@ -38,3 +38,39 @@ This repository contains a chatbot built using Flask, LangChain, and Qdrant. The
 7. Access the chatbot at:
     ```sh
     http://127.0.0.1:5000
+
+## Docker Setup
+To run the chatbot inside a Docker container, follow these steps:
+
+1. Build the Docker image:
+   ```sh
+   docker build -t flask-chatbot .
+   
+2. Run the Docker container:
+   ```sh
+   docker run -d -p 5000:5000  --name=chatbot flask-chatbot
+   
+3. The chatbot will be accessible at:
+   ```sh
+   http://127.0.0.1:5000
+
+## Usage
+1. Uploading PDF Files:
+   . The frontend allows users to upload PDF files.
+   . These PDFs are processed, and their content is stored in the Qdrant vector database.
+   
+2. Asking Questions:
+
+   . Once a document is uploaded, users can ask questions related to its content.
+   . The chatbot retrieves the most relevant text segments and generates responses based on them.
+   
+3. Example Workflow:
+
+   . Upload a PDF file via the frontend.
+   . Enter a question in the chat interface.
+   . Receive an AI-generated response based on the document’s content.
+
+![Chatbot Preview](static/dashboard/image.png)
+
+   
+
