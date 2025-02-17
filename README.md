@@ -72,9 +72,16 @@ To run the chatbot inside a Docker container, follow these steps:
 
    
 ## Preview
-![Chatbot Preview](static/images/Dashboard.JPG)
+   ![Chatbot Preview](static/images/Dashboard.JPG)
 
-![Chatbot Preview](static/images/chat.JPG)
+   ![Chatbot Preview](static/images/chat.JPG)
+
+
+## License
+   This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Contact
+   For any issues or feature requests, create an issue in the repository or reach out to me at engr.syeddanishsaleem@gmail.com.
 
 
    
