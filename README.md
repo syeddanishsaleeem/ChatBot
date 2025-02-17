@@ -72,9 +72,9 @@ To run the chatbot inside a Docker container, follow these steps:
 
    
 ## Preview
-![Chatbot Preview](static/images/Dashboard.jpg)
+![Chatbot Preview](static/images/Dashboard.JPG)
 
-![Chatbot Preview](static/images/chat.jpg)
+![Chatbot Preview](static/images/chat.JPG)
 
 
    
