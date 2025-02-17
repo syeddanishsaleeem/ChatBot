@@ -12,7 +12,7 @@ This repository contains a chatbot built using Flask, LangChain, and Qdrant. The
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/syeddanishsaleem/ChatBot.git
+   git clone https://github.com/syeddanishsaleeem/ChatBot.git
    cd ChatBot
 
 2. Create a virtual environment:
